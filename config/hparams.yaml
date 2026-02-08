@@ -1,0 +1,66 @@
+data:
+   rootPath: /data/jesuraj/AAI/pretraining/
+   featsPath: /data/jesuraj/AAI/bigAAI/tmp/feats/
+   phonPadValue: 0
+
+   
+  
+type:
+  aai: &aai
+    name: aai
+    model_size: default
+    batch_size: 12
+    model: fastspeech
+    num_speakers: 38
+    finetune_chk:
+    finetune: true
+    num_epochs: 500
+    warmup: false
+    warmup_steps: 1
+    early_stop: true
+    early_stop_min: -1
+    
+
+common:
+  sub: 'all'
+  datasetNames: [SpireEMA]
+  device: 'cuda:0'
+  upload_freq: 1
+  break_mode: false
+  mode: *aai
+  infer: true
+  finetune: false
+  pooled: true
+  additional_feats: [] #[segment,pyannote]
+  model_size: default
+  # predict: ['place', 'manner', 'height', 'backness']
+  # predict: ['weights']
+  predict: ['ema']
+  inputs: feats
+  loss: mse
+  exclude_utts: []
+  exclude_odd: false
+  load_models: []
+
+
+
+  
+optimizer:
+  name: adam
+  lr: 1e-4
+  weightdecay: 1e-6
+
+earlystopper:
+  patience: 10
+  verbose: True
+  minRun: 0
+  delta: 0
+  checkpoint_tag: ''
+  reuse: True
+
+logging:
+  project_name: spk_adapt_aai
+  notes:
+  tags:
+  run_name: baseline_testing
+  disable: false
