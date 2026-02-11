@@ -46,11 +46,11 @@ The config file is organized into the following sections:
 * **`logging`**: Experiment logging paths.
 
 
-## 📂 Data Preparation
+##  Data Preparation
 
 For detailed instructions on how to prepare your dataset and features, please refer to the specific documentation:
 
-[**data_prep/README.md**](data_prep/README.md)
+[**data_prep/README.md**](prepare_data/README.md)
 
 ### Usage
 The entry point for both training and inference is `run.py`. The mode is determined by the `infer` flag in the configuration file.
