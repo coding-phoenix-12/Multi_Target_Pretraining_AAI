@@ -46,6 +46,7 @@ The config file is organized into the following sections:
 * **`logging`**: Experiment logging paths.
 
 
+
 ##  Data Preparation
 
 For detailed instructions on how to prepare your dataset and features, please refer to the specific documentation:
@@ -68,6 +69,43 @@ Run the training script:
 ```bash
 python run.py --config path/to/config.yaml
 ```
+
+The framework automatically selects the appropriate model architecture based on the `predict` targets defined in your config and the `run_name`.
+
+| Scenario | Config Settings | Model Class Used |
+| :--- | :--- | :--- |
+| **Baseline AAI** | `common.predict` includes `"ema"` <br> AND `logging.run_name` includes `"baseline"` | `baseline.FastSpeech` |
+| **Fine-tuning** | `common.predict` includes `"ema"` <br> AND `logging.run_name` does **not** include `"baseline"` | `finetune.FastSpeechft` |
+| **Pretraining** | `common.predict` includes any of: <br> `["place", "manner", "height", "backness", "phones", "weights"]` | `pretrain.FastSpeech` |
+
+
+### Example Configs
+
+**1. To run the Baseline AAI model:**
+```yaml
+common:
+  predict: ["ema"]
+logging:
+  run_name: "my_baseline_experiment"
+
+```
+***2. To run Pretraining (e.g., on Place of Articulation):
+
+```yaml
+common:
+  predict: ["place"]
+```
+
+### Advanced Data & Model Control
+
+These parameters in `config.yaml` allow you to simulate low-resource settings and control fine-tuning:
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| **`exclude_utts`** | `list` | **Low-Resource Simulation:** Controls which utterances or what percentage of data to use. This is used to simulate low-resource settings by training on only a fraction of the dataset. |
+| **`exclude_odd`** | `bool` | **Data Split Control:** If set to `true`, it excludes odd-numbered utterances from the training set (often used for specific train/test splits). |
+| **`load_models`** | `list` | **Fine-tuning Checkpoint:** Specifies the name(s) of the pretrained model checkpoint(s) to load when starting a fine-tuning run. |
+
 ###2. Inference
 To generate EMA predictions using a trained checkpoint, update the config:
 
