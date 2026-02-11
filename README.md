@@ -45,6 +45,13 @@ The config file is organized into the following sections:
 * **`earlystopper`**: Early stopping criteria.
 * **`logging`**: Experiment logging paths.
 
+
+## 📂 Data Preparation
+
+For detailed instructions on how to prepare your dataset and features, please refer to the specific documentation:
+
+[**data_prep/README.md**](data_prep/README.md)
+
 ### Usage
 The entry point for both training and inference is `run.py`. The mode is determined by the `infer` flag in the configuration file.
 
@@ -79,7 +86,7 @@ The model will load the checkpoint saved during training specified by run name i
 ### Citation
 If you use this code or findings in your research, please cite our Interspeech 2025 paper:
 
-Code snippet
+```bibtex
 @inproceedings{bandekar2025enhancing,
   title={Enhancing Acoustic-to-Articulatory Inversion with Multi-Target Pretraining for Low-Resource Settings},
   author={Bandekar, Jesuraj and Ghosh, Prasanta Kumar},
@@ -87,3 +94,4 @@ Code snippet
   pages={5588--5592},
   year={2025}
 }
+```
