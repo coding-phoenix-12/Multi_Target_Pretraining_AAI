@@ -51,7 +51,7 @@ The config file is organized into the following sections:
 
 For detailed instructions on how to prepare your dataset and features, please refer to the specific documentation:
 
-[**data_prep/README.md**](prepare_data/README.md)
+[**prepare_data/README.md**](prepare_data/README.md)
 
 ### Usage
 The entry point for both training and inference is `run.py`. The mode is determined by the `infer` flag in the configuration file.
