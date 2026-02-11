@@ -87,9 +87,9 @@ common:
   predict: ["ema"]
 logging:
   run_name: "my_baseline_experiment"
-
 ```
-***2. To run Pretraining (e.g., on Place of Articulation):
+
+**2. To run Pretraining (e.g., on Place of Articulation):**
 
 ```yaml
 common:
