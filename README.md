@@ -8,9 +8,7 @@ Official implementation of the Interspeech 2025 paper: **[Multi-Target Pretraini
 
 This repository contains the training and inference pipeline for **Acoustic-to-Articulatory Inversion (AAI)**. The framework utilizes a **FastSpeech-based model** to predict Electromagnetic Articulography (EMA) trajectories from acoustic features.
 
-## 📌 Abstract
 
-Acoustic-to-Articulatory Inversion (AAI) involves estimating articulatory movements from speech acoustics. This work introduces a multi-target pretraining framework to improve AAI performance by leveraging auxiliary tasks and robust feature representations. The model is designed to be configurable and efficient, supporting various feature inputs and articulatory outputs.
 
 ## 🛠️ Setup
 
@@ -24,58 +22,61 @@ Install the required dependencies:
 pip install torch numpy pyyaml tqdm
 ```
 
-⚙️ Configuration
+
+
+### Configuration
 All experiment settings are controlled via a YAML configuration file. You do not need to modify the code to change hyperparameters.
 
-Key Configuration Sections
-Before running, update the data section in your config.yaml to point to your dataset:
+### Key Configuration Sections
+Before running, update the `data` section in your `config.yaml` to point to your dataset:
 
-YAML
+```yaml
 data:
   rootPath: /path/to/data/root
   featsPath: /path/to/features
+```
+
 The config file is organized into the following sections:
 
-data: Dataset paths and feature definitions.
+* **`data`**: Dataset paths and feature definitions.
+* **`type`**: Model architecture settings (e.g., FastSpeech parameters, batch size, epochs).
+* **`common`**: Runtime settings (device, dataset selection, input/output dims).
+* **`optimizer`**: Learning rate and optimizer specific settings.
+* **`earlystopper`**: Early stopping criteria.
+* **`logging`**: Experiment logging paths.
 
-type: Model architecture settings (e.g., FastSpeech parameters, batch size, epochs).
+### Usage
+The entry point for both training and inference is `run.py`. The mode is determined by the `infer` flag in the configuration file.
 
-common: Runtime settings (device, dataset selection, input/output dims).
+### 1. Training
 
-optimizer: Learning rate and optimizer specific settings.
+To train the model, set the inference flag to `false` in your config:
 
-earlystopper: Early stopping criteria.
-
-logging: Experiment logging paths.
-
-Usage
-The entry point for both training and inference is run.py. The mode is determined by the infer flag in the configuration file.
-
-1. Training
-To train the model, set the inference flag to false in your config:
-
-YAML
+```yaml
 # config.yaml
 common:
   infer: false
+```
 Run the training script:
-
-Bash
+```bash
 python run.py --config path/to/config.yaml
-2. Inference
+```
+###2. Inference
 To generate EMA predictions using a trained checkpoint, update the config:
 
-YAML
+```yaml
 # config.yaml
 common:
   infer: true
+```
 Run the same script:
 
-Bash
+```bash
 python run.py --config path/to/config.yaml
+```
 The model will load the checkpoint saved during training specified by run name in config and generate predictions.
 
-📄 Citation
+### Citation
 If you use this code or findings in your research, please cite our Interspeech 2025 paper:
 
 Code snippet
