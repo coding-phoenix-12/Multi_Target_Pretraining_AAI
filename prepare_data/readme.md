@@ -23,7 +23,7 @@ For the large-scale pretraining phase, we use the Libri360 dataset.
 
 2.  **Place the Alignment File**:
     Copy your generated alignment file (`FA.txt`) into this directory.
-    * *File location:* `data_prep/FA.txt`
+    * *File location:* `prepare_data/FA.txt`
 
 3.  **Run the data creation script**:
     ```bash
