@@ -1,6 +1,6 @@
 data:
-   rootPath: /data/jesuraj/AAI/pretraining/
-   featsPath: /data/jesuraj/AAI/bigAAI/tmp/feats/
+   rootPath: <root_path_of_the repo>
+   featsPath: <tera feats path>
    phonPadValue: 0
 
    
