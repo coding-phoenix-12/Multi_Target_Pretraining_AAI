@@ -32,8 +32,8 @@ class Dataset_prepare_dump(torch.utils.data.Dataset):
             # mode = mode.split('_')[-1]
         self.parse_file_based_on_mode(mode, spk)
         
-        self.classes = torch.load("/data/jesuraj/AAI/pretraining/classes.pt", weights_only=False)
-        self.phonemes = torch.load("/data/jesuraj/AAI/pretraining/phoneme_class.pt", weights_only=False)
+        self.classes = torch.load(os.path.join(self.config.data.rootPath, "prepare_data", "classes.pt"), weights_only=False)
+        self.phonemes = torch.load(os.path.join(self.config.data.rootPath, "prepare_data","phoneme_class.pt"), weights_only=False)
         
         self.art_label_map = {}
         for cl in self.classes.keys():
@@ -82,7 +82,7 @@ class Dataset_prepare_dump(torch.utils.data.Dataset):
             spire_ema_files = sorted([x for x in os.listdir(os.path.join(self.rootPath, 'tmp')) if "SpireEMA" in x and x.split("_")[1] not in self.unseen_test_subjects])
             if "train" in mode and "ema" not in self.config.common.predict:
                 if "libri360" in self.config.common.datasetNames:
-                    self.files += [os.path.join('/home2/data/jesuraj/AAI/data/tmp/', x) for x in os.listdir(os.path.join('/home2/data/jesuraj/AAI/data/tmp/'))]
+                    self.files += [os.path.join(self.rootPath, 'tmp', x) for x in os.listdir(os.path.join(self.rootPath, 'tmp'))]
 
                 if "libri100" in self.config.common.datasetNames:
                     self.files += [os.path.join(self.rootPath, 'tmp', x) for x in os.listdir(os.path.join(self.rootPath, 'tmp')) if "SpireEMA" not in x]
